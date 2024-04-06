@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "ab707f8b-9d14-4b26-b4ab-b54ea2f7e11c",
+		"name": "API Game Reviews",
+		"description": "Api destinada para gestionar una página de reseñas de videojuegos.\n\nPara poder usar los endpoint que encontramos en las carpetas que nos indican que necesitan permisos debemos usar el bearer token que nos devuelve la petición de Login.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32189056"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth - public",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"passwordadmin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_AUTH}}/login",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_AUTH}}",
+										"login"
+									]
+								},
+								"description": "Endpoint que se engarga de los inicios de sesión y devolverá un bearer token válido por una hora.\n\nCon el cuerpo por defecto de esta petición accederemos con una cuenta de administrador."
+							},
+							"response": []
+						},
+						{
+							"name": "Crear usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nick\": \"usuario\",\r\n    \"email\": \"usuario@usuario\",\r\n    \"password\": \"passwordusuario\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_AUTH}}/signup",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_AUTH}}",
+										"signup"
+									]
+								},
+								"description": "Endpoint que se engarga de crear nuevos usuarios y devolverá un bearer token válido por una hora del usuario que se acaba de crear.\n\nPodemos incluir campos opcionales como **telefono(string)** e **imagenPerfil(byte\\[\\])**.\n\nTodos los usuarios que se crean mediante esta petición tienen por defecto el rol de usuario."
+							},
+							"response": []
+						}
+					],
+					"description": "Conjunto de endpoints que no necesitan autentificación para usarse."
+				},
+				{
+					"name": "Auth - authenticated",
+					"item": [
+						{
+							"name": "Login con token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwODA3NjQwMiwiZXhwIjoxNzA4MTYyODAyfQ.74vWn7GBGg5CQl3Z_WG5oDNKVavEcFMIrz5d0lPtdvk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_AUTH}}/loginToken",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_AUTH}}",
+										"loginToken"
+									]
+								},
+								"description": "Endpoint que se engarga de refrescar los bearer token devolviendo otro token válido por una hora."
+							},
+							"response": []
+						}
+					],
+					"description": "Conjunto de endpoints que necesitan autentificación para usarse."
+				}
+			],
+			"description": "Colección de peticiones que se encargan de la autentificación de los usuarios de la api."
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users - authenticated",
+					"item": [
+						{
+							"name": "Permisos de mi usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwODUxNDEzOCwiZXhwIjoxNzA4NTE3NzM4fQ.8VDI1fKpb-gBNv1ADFLc6-2Sxp6pMFIv3qftYtfRjnU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_USER}}/roles",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_USER}}",
+										"roles"
+									]
+								},
+								"description": "Endpoint que se engarga de mostrar los roles que tiene el usuario actual mediante su bearer token."
+							},
+							"response": []
+						}
+					],
+					"description": "Conjunto de endpoints que necesitan autentificación para usarse."
+				},
+				{
+					"name": "Users - admin",
+					"item": [
+						{
+							"name": "Lista de usuarios",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmkiLCJpYXQiOjE3MDg2MDc1MTAsImV4cCI6MTcwODYxMTExMH0.CN4UC5pnc1cIbN5pc8Y_hDVg7z2qXKAlT688ccOpvMU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_USER}}/",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_USER}}",
+										""
+									]
+								},
+								"description": "Endpoint que se engarga de mostrar la imagen de perfil y el nick de todos los usuarios registrados."
+							},
+							"response": []
+						}
+					],
+					"description": "Conjunto de endpoints que necesitan el rol de administrador para usarse."
+				}
+			],
+			"description": "Colección de peticiones que se encargan de la visualización de los datos de los usuarios de la api."
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Games - public",
+					"item": [
+						{
+							"name": "Get videojuego",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_GAME}}/{{NombreVideojuego}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_GAME}}",
+										"{{NombreVideojuego}}"
+									]
+								},
+								"description": "Endpoint que se engarga de mostrar los datos de un videojuego buscándolo por su nombre.\n\nEjemplo url:\n\n> {{HOST}}/{{API_V1}}/{{SERVICIO_GAME}}/{Nombre_del_videojuego}"
+							},
+							"response": []
+						},
+						{
+							"name": "Lista de videojuegos",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_GAME}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_GAME}}"
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "tag",
+											"value": "Accion",
+											"disabled": true
+										},
+										{
+											"key": "tag",
+											"value": "Aventura",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Endpoint que se engarga de mostrar los datos de todos los videojuegos, por defecto sin filtrar.\n\nAl usar los parametros **nombre** y **tag** devuelve una lista filtrada según si el nombre contiene la cadena que se le ha pasado y si el videojuego tiene un tag coincidente."
+							},
+							"response": []
+						}
+					],
+					"description": "Conjunto de endpoints que no necesitan autentificación para usarse."
+				},
+				{
+					"name": "Games - admin",
+					"item": [
+						{
+							"name": "Crear videojuego",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwOTIxNDAxNSwiZXhwIjoxNzA5MjE3NjE1fQ.8o8iQLGkcxXdhvg4TPmH-VwG9MP-MN3JAtns7EF1LVE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"VideojuegoTest\",\r\n    \"fechaCreacion\": \"2024-02-19\",\r\n    \"sinopsis\": \"Sinopsis\",\r\n    \"tags\": [\"Accion\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_GAME}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_GAME}}"
+									]
+								},
+								"description": "Endpoint que se engarga de crear un nuevo videojuego.\n\nEn el cuerpo del json podemos añadir también el campo opcional **imagenPortada(byte\\[\\])**."
+							},
+							"response": []
+						}
+					],
+					"description": "Conjunto de endpoints que necesitan el rol de administrador para usarse."
+				}
+			],
+			"description": "Colección de peticiones que se encargan de la visualización de los datos de los videojuegos guardados en la api."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "API_V1",
+			"value": "api/v1",
+			"type": "string"
+		},
+		{
+			"key": "SERVICIO_AUTH",
+			"value": "auth",
+			"type": "string"
+		},
+		{
+			"key": "SERVICIO_USER",
+			"value": "user",
+			"type": "string"
+		},
+		{
+			"key": "SERVICIO_GAME",
+			"value": "videojuego",
+			"type": "string"
+		},
+		{
+			"key": "NombreVideojuego",
+			"value": "VideojuegoTest"
+		}
+	]
+}
