@@ -1,2 +1,12 @@
 @import "variables";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "~@fontsource/press-start-2p/index.css";
+
+body {
+  font-family: "Press Start 2P";
+  background-color: $light;
+}
+
+.vh10 {
+  height: 10vh;
+}
