@@ -47,18 +47,6 @@ public class DatosIniciales implements CommandLineRunner {
 			logger.info("## Admin guardado ##");
 		}
 		
-		if(gameRepo.findByNombre("VideojuegoTest") == null) {
-			logger.info("## Creando videojuego ##");
-			Videojuego game = new Videojuego(
-						"VideojuegoTest",
-						new Date(),
-						"ImagenRota".getBytes(),
-						"Sinopsis"
-					);
-			gameRepo.save(game);
-			logger.info("## Videojuego guardado ##");
-		}
-		
 		logger.info("## Saliendo del CommandLineRunner ##");
 	}
 	

@@ -1,6 +1,8 @@
 package com.review.tfg.controller;
 
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.review.tfg.dto.auth.response.LoginDataResponse;
 import com.review.tfg.dto.usuario.response.UsuarioSimplificadoResponse;
 import com.review.tfg.service.UsuarioService;
+import com.review.tfg.entity.Role;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,5 +39,17 @@ public class UsuarioController {
 	@GetMapping("/roles")
     public ResponseEntity<?> getRoles(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(userDetails.getAuthorities());
+    }
+
+	@GetMapping("/datosUsuario")
+    public ResponseEntity<LoginDataResponse> getUserData(@AuthenticationPrincipal UserDetails userDetails) {
+		
+		//Obtenemos los roles
+		Set<Role> roles = new HashSet<Role>();
+		userDetails.getAuthorities().forEach(p -> {
+			roles.add(Role.valueOf(p.getAuthority()));
+		});
+		
+		return ResponseEntity.ok(new LoginDataResponse(usuarioService.getUserByName(userDetails.getUsername()), roles));
     }
 }

@@ -46,4 +46,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 					.collect(Collectors.toList());
 	}
 
+	@Override
+	public Usuario getUserByName(String name) {
+		return repo.findByNick(name);
+	}
+
 }
