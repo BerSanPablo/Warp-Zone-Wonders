@@ -35,6 +35,7 @@ export class HeaderComponent {
       }
       else{
         document.getElementById("cierreModal")!.click()
+        this.router.navigate(['/']);
       }
 
     }finally{
