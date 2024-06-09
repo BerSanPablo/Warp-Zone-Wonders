@@ -1,0 +1,7 @@
+<div id="listadoCartas" class="d-flex flex-row flex-wrap justify-content-evenly gap-5 p-5 w-100">
+
+  <div *ngFor="let videojuego of videojuegos" class="col-12 col-sm-5 col-md-3 col-lg-2">
+    <video-game-card [videojuego]="videojuego" />
+  </div>
+
+</div>

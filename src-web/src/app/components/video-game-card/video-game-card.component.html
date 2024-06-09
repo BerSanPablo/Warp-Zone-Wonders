@@ -1,0 +1,30 @@
+<div class="card ">
+
+  <!-- IMAGEN -->
+  <img *ngIf="videojuego.imagenPortada == null" src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg" class="card-img-top" alt="Sin imagen">
+  <img *ngIf="videojuego.imagenPortada != null" [src]="sanitizeImageBlob()" id="imagen" class="card-img-top">
+
+  <!-- CONTENEDOR DE LOS DATOS -->
+  <div class="collapse bg-dark text-light" [id]="nombreSinEspacios()">
+    <div class="mt-2">
+      <h6 class="card-title text-center">{{videojuego.nombre}}</h6>
+    </div>
+
+    <div class="p-2 container d-flex flex-wrap align-items-center justify-content-center">
+      <div *ngFor="let tag of videojuego.tags" class="tag">
+        <span class="badge rounded-pill bg-light text-dark m-1">{{tag}}</span>
+      </div>
+    </div>
+
+    <div class="mx-2">
+      {{sinopsisCorta(10)}}
+    </div>
+  </div>
+
+  <!-- DESPLEGABLE -->
+  <a class="btn btn-primary rounded-0 rounded-bottom" (click)="desplegado = !desplegado" data-bs-toggle="collapse" onclick="switchDespliegue" [href]="'#' + nombreSinEspacios()" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <i *ngIf="!desplegado" class="bi bi-caret-down-fill"></i>
+    <i *ngIf="desplegado" class="bi bi-caret-up-fill"></i>
+  </a>
+
+</div>
