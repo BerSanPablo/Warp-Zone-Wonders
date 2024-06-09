@@ -74,6 +74,48 @@ export class UserService {
     return true
   }
 
+  async loginCreacionCuenta(email:string, token: string) {
+
+    //Datos para la conexion
+    const url = "http://localhost:8080/api/v1";
+    const headersLogin = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    //Recogemos los datos de forma asíncrona
+    let datosUsuarioResponse: any
+    try{
+
+      //Con el token hacemos una petición para recoger los datos del usuario
+      const headersData = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      });
+      datosUsuarioResponse = await firstValueFrom(this.http.get<any>(url + '/user/datosUsuario', { headers: headersData }));
+
+    }catch(err){
+      return false
+    }
+
+    //Creamos el usuario con los datos de las respuestas
+    const user = {
+      nick: datosUsuarioResponse.nick,
+      email: email,
+      comunidad: datosUsuarioResponse.comunidad,
+      token: token,
+      imagenPerfil: datosUsuarioResponse.imagenPerfil,
+      roles: datosUsuarioResponse.roles
+    }
+
+    //Guardamos el usuario en el servicio
+    this.setUser(user)
+
+    //Guardamos el usuario en sesion
+    sessionStorage.setItem('U2FsdGVkX19esp5By6OH6I4AU3+FG/iAEZF3XgqUZjs=', JSON.stringify(user))
+
+    return true
+  }
+
   setUser(data: UserData): void {
     this.userData = data;
   }
@@ -84,6 +126,7 @@ export class UserService {
 
   clearUser(): void {
     this.userData = null;
+    sessionStorage.removeItem('U2FsdGVkX19esp5By6OH6I4AU3+FG/iAEZF3XgqUZjs=');
   }
 
   getSrcImagen(){

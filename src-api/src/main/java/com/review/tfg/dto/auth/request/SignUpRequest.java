@@ -1,12 +1,14 @@
 package com.review.tfg.dto.auth.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class SignUpRequest {
 	
 	@Size(max = 16000000, message = "La imagen de perfil es demasiado grande")
-	private byte[] imagenPerfil;
+	private MultipartFile imagenPerfil;
 	
 	@NotBlank(message = "El nick no se puede dejar vacío")
 	@Size(max = 100, message = "El nick debe tener un maximo de 100 caracteres")
@@ -23,7 +25,7 @@ public class SignUpRequest {
 
 	public SignUpRequest() {}
 
-	public SignUpRequest(String password, byte[] imagenPerfil, String nick, String email, String comunidad) {
+	public SignUpRequest(String password, MultipartFile imagenPerfil, String nick, String email, String comunidad) {
 		this.password = password;
 		this.comunidad = comunidad;
 		this.email = email;
@@ -55,11 +57,11 @@ public class SignUpRequest {
 		this.comunidad = comunidad;
 	}
 
-	public byte[] getImagenPerfil() {
+	public MultipartFile getImagenPerfil() {
 		return imagenPerfil;
 	}
 
-	public void setImagenPerfil(byte[] imagenPerfil) {
+	public void setImagenPerfil(MultipartFile imagenPerfil) {
 		this.imagenPerfil = imagenPerfil;
 	}
 

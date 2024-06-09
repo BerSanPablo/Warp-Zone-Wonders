@@ -38,12 +38,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 	@Override
 	public TokenDTO signup(SignUpRequest request) throws IllegalArgumentException{
 
-		Usuario usuario = new Usuario();
-		usuario.setImagenPerfil(request.getImagenPerfil());
-		usuario.setNick(request.getNick());
-		usuario.setEmail(request.getEmail());
-		usuario.setComunidad(request.getComunidad());
-		usuario.setPassword(passwordEncoder.encode(request.getPassword()));
+		Usuario usuario = new Usuario(request);
 		userRepo.save(usuario);
 		
 		logger.info("## USUARIO CREADO CON EXITO ##");

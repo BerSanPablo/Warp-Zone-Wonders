@@ -4,5 +4,5 @@ export interface UserData {
 	comunidad:string;
 	token:string;
 	imagenPerfil:File|null;
-	roles:Set<string>;
+	roles:Array<string>;
 }

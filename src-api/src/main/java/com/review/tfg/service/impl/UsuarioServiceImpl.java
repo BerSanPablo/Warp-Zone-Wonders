@@ -51,4 +51,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return repo.findByNick(name);
 	}
 
+	@Override
+	public boolean checkName(String name) {
+		return !repo.existsByNick(name);
+	}
+
+	@Override
+	public boolean checkMail(String mail) {
+		return !repo.existsByEmail(mail);
+	}
+
 }

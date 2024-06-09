@@ -51,9 +51,25 @@
               </li>
               <li class="nav-item">
                   <h3><a class="nav-link text-light active" href="/tags">Etiquetas</a></h3>
-              </li>
-              <li class="nav-item">
-                  <h3><a class="nav-link text-light" href="/reviews">Reseñas</a></h3>
+                </li>
+                <li class="nav-item">
+                    <h3><a class="nav-link text-light" href="/reviews">Reseñas</a></h3>
+                </li>
+                <li *ngIf="this.usuarioService.getUser()?.roles?.includes('ROLE_ADMIN')" class="nav-item">
+                    <h3><a class="nav-link text-light" href="/admin">Admin</a></h3>
+                </li>
+            </ul>
+          </div>
+
+          <div class="row flex-grow-1">
+
+          </div>
+
+          <div class="row pb-2">
+
+            <ul class="navbar-nav justify-content-end flex-grow-1 px-5 lista">
+              <li *ngIf="usuarioService.getUser()" class="nav-item">
+                  <h3 (click)="cierreSesion()">Salir</h3>
               </li>
             </ul>
           </div>
@@ -72,7 +88,7 @@
 
       <div class="modal-header border-0">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Inicio de sesión</h1>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button id="cierreModal" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
@@ -101,7 +117,7 @@
           <div>¿No tiene cuenta?</div>
         </div>
         <div class="mt-2 w-100 d-flex justify-content-center">
-          <button type="button" class="btn btn-light text-dark">Registrarse</button>
+          <a class="nav-link text-light" href="/registro"><button type="button" class="btn btn-light text-dark">Registrarse</button></a>
         </div>
 
       </div>

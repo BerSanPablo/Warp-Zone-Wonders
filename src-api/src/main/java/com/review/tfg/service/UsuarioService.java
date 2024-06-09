@@ -9,6 +9,8 @@ import com.review.tfg.entity.Usuario;
 
 public interface UsuarioService {
 	Usuario getUserByName(String name);
+	boolean checkName(String name);
+	boolean checkMail(String mail);
 	UserDetailsService userDetailsService();
 	List<UsuarioSimplificadoResponse> obtenerUsuarios();
 }

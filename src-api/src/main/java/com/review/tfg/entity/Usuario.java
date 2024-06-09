@@ -1,5 +1,6 @@
 package com.review.tfg.entity;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,6 +12,10 @@ import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.review.tfg.dto.auth.request.SignUpRequest;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -105,6 +110,22 @@ public class Usuario implements UserDetails {
 		}
 		this.roles.add(Role.ROLE_USER);
 		this.fechaCreacion = new Date();
+	}
+
+	public Usuario() {}
+	
+	public Usuario(SignUpRequest request) {
+		this.nick = request.getNick();
+		this.comunidad = request.getComunidad();
+		this.email = request.getEmail();
+		this.password = new BCryptPasswordEncoder(10).encode(request.getPassword());
+		
+		try {
+			MultipartFile imagenPortada = request.getImagenPerfil();
+			this.imagenPerfil = (imagenPortada == null)? null : imagenPortada.getBytes();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
