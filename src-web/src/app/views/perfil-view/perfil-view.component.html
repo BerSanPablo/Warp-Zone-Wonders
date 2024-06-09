@@ -1,0 +1,25 @@
+<div id="perfilUsuario" class="p-5 d-flex flex-column">
+
+  <div id="cabeceraPerfil" class="row">
+
+    <div id="contenedorImagen" class="col-2 p-0 aspect-ratio">
+      <img class="w-100 h-100 rounded-circle" [src]="usuarioService.getSrcImagen()">
+    </div>
+
+    <div id="contenedorCredenciales" class="col-10 px-5 d-flex flex-column justify-content-center">
+      <div class="h1">{{userData!.nick}}</div>
+      <div class="h1 pt-4">{{userData!.email}}</div>
+    </div>
+  </div>
+
+  <div id="datosUsuario" class="row pt-5">
+    <div id="contenedorCredenciales" class="col-10 d-flex flex-column justify-content-center">
+      <div class="h2">Comunidad: {{userData!.comunidad}}</div>
+    </div>
+  </div>
+
+  <div id="contenedorBotones" class="pt-4 d-flex w-100 flex-row-reverse">
+    <button type="button" class="btn btn-dark text-light">Editar</button>
+  </div>
+
+</div>

@@ -58,6 +58,7 @@ export class UserService {
     //Creamos el usuario con los datos de las respuestas
     const user = {
       nick: datosUsuarioResponse.nick,
+      email: email,
       comunidad: datosUsuarioResponse.comunidad,
       token: tokenResponse.token,
       imagenPerfil: datosUsuarioResponse.imagenPerfil,
