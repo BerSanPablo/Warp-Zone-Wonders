@@ -12,6 +12,10 @@ export class VideoGameService {
 
   constructor(private http:HttpClient) { }
 
+  getVideojuegoByName(nombre: string):Observable<VideojuegoDTO[]>{
+    return this.http.get<VideojuegoDTO[]>(this.url + nombre);
+  }
+
   getVideojuegos():Observable<VideojuegoDTO[]>{
     return this.http.get<VideojuegoDTO[]>(this.url);
   }
