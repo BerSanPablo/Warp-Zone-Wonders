@@ -43,17 +43,14 @@
           <div class="row">
 
             <ul class="navbar-nav justify-content-end flex-grow-1 px-5 lista">
-              <li *ngIf="usuarioService.getUser()" class="nav-item">
-                  <h3><a class="nav-link text-light" href="/perfil">Perfil</a></h3>
-              </li>
               <li class="nav-item">
                   <h3><a class="nav-link text-light" href="/">Juegos</a></h3>
               </li>
               <li class="nav-item">
                   <h3><a class="nav-link text-light active" href="/tags">Etiquetas</a></h3>
                 </li>
-                <li class="nav-item">
-                    <h3><a class="nav-link text-light" href="/reviews">Reseñas</a></h3>
+                <li *ngIf="usuarioService.getUser()" class="nav-item">
+                    <h3><a class="nav-link text-light" href="/perfil">Perfil</a></h3>
                 </li>
                 <li *ngIf="this.usuarioService.getUser()?.roles?.includes('ROLE_ADMIN')" class="nav-item">
                     <h3><a class="nav-link text-light" href="/admin">Admin</a></h3>
@@ -69,7 +66,7 @@
 
             <ul class="navbar-nav justify-content-end flex-grow-1 px-5 lista">
               <li *ngIf="usuarioService.getUser()" class="nav-item">
-                  <h3 (click)="cierreSesion()">Salir</h3>
+                  <h3 role='button' (click)="cierreSesion()">Salir</h3>
               </li>
             </ul>
           </div>
