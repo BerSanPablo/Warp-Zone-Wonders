@@ -1,0 +1,27 @@
+<div id="detalleJuego" class="p-5">
+
+  <div id="cabeceraVideojuego" class="row">
+
+    <div id="contenedorImagen" class="col-6 col-md-4 col-lg-2 pr-r aspect-ratio">
+      <img class="w-100 h-100 rounded" [src]="sanitizeImageBlob(videojuegoDetails.imagenPortada)">
+    </div>
+
+    <div id="contenedorCredenciales" class="col-12 col-md-8 col-lg-10 p-0 pt-3 d-flex flex-column justify-content-center">
+      <div class="h1">{{videojuegoDetails.nombre}}</div>
+      <div class="h1 pt-4">Lanzamiento: {{videojuegoDetails.fechaCreacion}}</div>
+    </div>
+
+    <div class="p-2 container d-flex flex-wrap align-items-center justify-content-center">
+      <div *ngFor="let tag of videojuegoDetails.tags" class="tag">
+        <span class="badge rounded-pill bg-dark text-light m-1">{{tag}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="datosUsuario" class="row pt-5">
+    <div id="contenedorCredenciales" class="col-12 d-flex flex-column justify-content-center">
+      <div class="h2">{{videojuegoDetails.sinopsis}}</div>
+    </div>
+  </div>
+
+</div>

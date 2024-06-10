@@ -1,8 +1,12 @@
 <div class="card ">
 
   <!-- IMAGEN -->
-  <img *ngIf="videojuego.imagenPortada == null" src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg" class="card-img-top" alt="Sin imagen">
-  <img *ngIf="videojuego.imagenPortada != null" [src]="sanitizeImageBlob()" id="imagen" class="card-img-top">
+  <a [href]="'videojuego/' + videojuego.nombre" *ngIf="videojuego.imagenPortada == null">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg" class="card-img-top" alt="Sin imagen">
+  </a>
+  <a [href]="'videojuego/' + videojuego.nombre" *ngIf="videojuego.imagenPortada != null">
+    <img *ngIf="videojuego.imagenPortada != null" [src]="sanitizeImageBlob()" id="imagen" class="card-img-top">
+  </a>
 
   <!-- CONTENEDOR DE LOS DATOS -->
   <div class="collapse bg-dark text-light" [id]="nombreSinEspacios()">
