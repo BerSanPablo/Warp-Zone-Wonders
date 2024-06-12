@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ReviewService } from 'src/app/services/ReviewService/review-service.service';
 import { ReviewComponent } from 'src/app/components/review/review.component';
 import { Review } from 'src/app/entities/review';
+import { UserService } from 'src/app/services/UserService/user-service.service';
 
 @Component({
   selector: 'app-detalle-juego',
@@ -27,7 +28,7 @@ export class DetalleJuegoComponent {
 
   reviews: Review[] = []
 
-  constructor(private servicioVideojuego: VideoGameService, private servicioReview: ReviewService, private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer) {
+  constructor(protected usuarioService: UserService, private servicioVideojuego: VideoGameService, private servicioReview: ReviewService, private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer) {
     const nombre = this.route.snapshot.paramMap.get('nombre')
 
     if(nombre == null){

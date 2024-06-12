@@ -1,3 +1,7 @@
 <div id="detalleJuego" class="p-5">
-  <review-completa *ngFor="let review of reviews" [reviewData]="review" />
+
+  <div *ngFor="let review of reviews" class="py-2">
+    <review-completa [reviewData]="review" />
+  </div>
+
 </div>

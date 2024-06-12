@@ -5,6 +5,7 @@ import { RegistroViewComponent } from './views/registro-view/registro-view.compo
 import { CreateJuegoComponent } from './views/create-juego/create-juego.component';
 import { DetalleJuegoComponent } from './views/detalle-juego/detalle-juego.component';
 import { ReviewViewComponent } from './views/review-view/review-view.component';
+import { CreateReviewComponent } from './views/create-review/create-review.component';
 
 export const routes: Routes = [
   { path: '', component:  VideoGameViewComponent},
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'registro', component:  RegistroViewComponent},
   { path: 'admin', component:  CreateJuegoComponent},
   { path: 'videojuego/:nombre', component:  DetalleJuegoComponent},
+  { path: 'videojuego/:nombre/createReview', component:  CreateReviewComponent},
   { path: 'reviews', component:  ReviewViewComponent},
 ];
