@@ -85,7 +85,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwODA3NjQwMiwiZXhwIjoxNzA4MTYyODAyfQ.74vWn7GBGg5CQl3Z_WG5oDNKVavEcFMIrz5d0lPtdvk",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwOTU0MDc4NCwiZXhwIjoxNzA5NTQ0Mzg0fQ.ViRlCRpQu_ZNx_oObAdCtEIB-o5CnqVQPHd_XzGRw4k",
 											"type": "string"
 										}
 									]
@@ -127,7 +127,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwODUxNDEzOCwiZXhwIjoxNzA4NTE3NzM4fQ.8VDI1fKpb-gBNv1ADFLc6-2Sxp6pMFIv3qftYtfRjnU",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzk0NTAzMCwiZXhwIjoxNzE3OTQ4NjMwfQ.8j9EmkcJ51onK-EOJpMUxBVt7s9kt2BCOX00CHkKPxw",
 											"type": "string"
 										}
 									]
@@ -163,7 +163,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmkiLCJpYXQiOjE3MDg2MDc1MTAsImV4cCI6MTcwODYxMTExMH0.CN4UC5pnc1cIbN5pc8Y_hDVg7z2qXKAlT688ccOpvMU",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwOTgwMTU3OSwiZXhwIjoxNzA5ODA1MTc5fQ.x1szNfd-YtSl2hEJ90AWKnli37mes-6N3Cb95VDtDso",
 											"type": "string"
 										}
 									]
@@ -203,14 +203,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_GAME}}/{{NombreVideojuego}}",
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_GAME}}/Tomb Raider",
 									"host": [
 										"{{HOST}}"
 									],
 									"path": [
 										"{{API_V1}}",
 										"{{SERVICIO_GAME}}",
-										"{{NombreVideojuego}}"
+										"Tomb Raider"
 									]
 								},
 								"description": "Endpoint que se engarga de mostrar los datos de un videojuego buscándolo por su nombre.\n\nEjemplo url:\n\n> {{HOST}}/{{API_V1}}/{{SERVICIO_GAME}}/{Nombre_del_videojuego}"
@@ -270,7 +270,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwOTIxNDAxNSwiZXhwIjoxNzA5MjE3NjE1fQ.8o8iQLGkcxXdhvg4TPmH-VwG9MP-MN3JAtns7EF1LVE",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwOTU0MDc4NCwiZXhwIjoxNzA5NTQ0Mzg0fQ.ViRlCRpQu_ZNx_oObAdCtEIB-o5CnqVQPHd_XzGRw4k",
 											"type": "string"
 										}
 									]
@@ -305,6 +305,95 @@
 				}
 			],
 			"description": "Colección de peticiones que se encargan de la visualización de los datos de los videojuegos guardados en la api."
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Reviews - public",
+					"item": [
+						{
+							"name": "Obtener reviews",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_REVIEW}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_REVIEW}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener reviews filtrado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_REVIEW}}/Tomb Raider",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_REVIEW}}",
+										"Tomb Raider"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reviews - authenticated",
+					"item": [
+						{
+							"name": "Post review",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxODIyMjEzNCwiZXhwIjoxNzE4MjI1NzM0fQ.VoHli3ceS6fjX5fBQ_8-EV8dLpeKTCfz57Lyebm5dqQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombreUsuario\": \"admin\",\r\n    \"nombreVideojuego\": \"Tomb Raider\",\r\n    \"valoracion\": \"3\",\r\n    \"textoReview\": \"Ni fu ni fa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/{{API_V1}}/{{SERVICIO_REVIEW}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"{{API_V1}}",
+										"{{SERVICIO_REVIEW}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	],
 	"event": [
@@ -356,6 +445,11 @@
 		{
 			"key": "NombreVideojuego",
 			"value": "VideojuegoTest"
+		},
+		{
+			"key": "SERVICIO_REVIEW",
+			"value": "review",
+			"type": "string"
 		}
 	]
 }
