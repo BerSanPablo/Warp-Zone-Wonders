@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VideojuegoDTO } from 'src/app/entities/videojuego-dto';
@@ -18,6 +18,12 @@ export class VideoGameService {
 
   getVideojuegos():Observable<VideojuegoDTO[]>{
     return this.http.get<VideojuegoDTO[]>(this.url);
+  }
+
+  getVideojuegosFiltradoParcial(busqueda: string):Observable<VideojuegoDTO[]>{
+    let params = new HttpParams().set('nombre', busqueda);
+
+    return this.http.get<VideojuegoDTO[]>(this.url, { params });
   }
 
   postVideojuego(videojuego:VideojuegoDTO, token:string){
