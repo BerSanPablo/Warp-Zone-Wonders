@@ -4,11 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VideojuegoDTO } from 'src/app/entities/videojuego-dto';
 import { VideoGameService } from 'src/app/services/VideoGameService/video-game-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ReviewService } from 'src/app/services/ReviewService/review-service.service';
+import { ReviewComponent } from 'src/app/components/review/review.component';
+import { Review } from 'src/app/entities/review';
 
 @Component({
   selector: 'app-detalle-juego',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReviewComponent],
   templateUrl: './detalle-juego.component.html',
   styleUrls: ['./detalle-juego.component.scss']
 })
@@ -22,7 +25,9 @@ export class DetalleJuegoComponent {
     tags: []
   }
 
-  constructor(private servicioVideojuego: VideoGameService, private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer) {
+  reviews: Review[] = []
+
+  constructor(private servicioVideojuego: VideoGameService, private servicioReview: ReviewService, private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer) {
     const nombre = this.route.snapshot.paramMap.get('nombre')
 
     if(nombre == null){
@@ -39,6 +44,11 @@ export class DetalleJuegoComponent {
       this.videojuegoDetails.imagenPortada = videojuego.imagenPortada
       this.videojuegoDetails.sinopsis = videojuego.sinopsis
       this.videojuegoDetails.tags = videojuego.tags
+    }))
+
+    //Obtenemos las reseñas
+    servicioReview.getReviewsByVideojuego(nombre).subscribe((reviews => {
+      this.reviews = reviews
     }))
   }
 

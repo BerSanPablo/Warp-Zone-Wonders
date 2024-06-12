@@ -1,5 +1,7 @@
 package com.review.tfg.entity;
 
+import com.review.tfg.dto.review.request.ReviewCreateDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +41,15 @@ public class Review {
 	public Review(String textoReview, int valoracion, Usuario escritor, Videojuego videojuego) {
 		this.textoReview = textoReview;
 		this.valoracion = valoracion;
+		this.escritor = escritor;
+		this.videojuego = videojuego;
+
+		this.id = null;
+	}
+
+	public Review(ReviewCreateDTO reviewCreate, Usuario escritor, Videojuego videojuego) {
+		this.textoReview = reviewCreate.getTextoReview();
+		this.valoracion = reviewCreate.getValoracion();
 		this.escritor = escritor;
 		this.videojuego = videojuego;
 

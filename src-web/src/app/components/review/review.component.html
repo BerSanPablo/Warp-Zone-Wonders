@@ -1,0 +1,33 @@
+<div class="bg-primary container rounded d-flex align-items-center">
+
+  <div class="col flex-grow-1">
+    <div class="row p-2 container">
+
+      <div id="contenedorImagen" class="col-3 col-md-2 col-lg-1 p-0 aspect-ratio">
+        <img class="w-100 h-100 rounded-circle" [src]="getSrcImagen(reviewData!.imagenUsuario!)">
+      </div>
+
+      <div class="col flex-grow-1 text-light d-flex justify-content-around flex-column py-4">
+        <div class="p-1">{{reviewData!.nombreUsuario}}</div>
+
+        <div>
+          <i *ngFor="let i of getRange(5)" [class]="(i < reviewData!.valoracion)? 'bi bi-star-fill p-1' : 'bi bi-star p-1'"></i>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="row p-4 container text-light">
+
+      {{reviewData!.comentario}}
+
+    </div>
+  </div>
+
+  <div *ngIf="gameInfo" class="col-2">
+    <a [href]="'videojuego/' + gameInfo.nombre">
+      <img [src]="getSrcImagen(gameInfo.src)" id="imagen" class="card-img-top rounded">
+    </a>
+  </div>
+
+</div>
