@@ -53,7 +53,7 @@ export class CreateJuegoComponent {
       if(formularioValidado){
         const formData = new FormData();
         formData.append('nombre', this.createJuegoData.nombre);
-        formData.append('fechaCreacion', this.createJuegoData.fechaCreacion.getTime().toString());
+        formData.append('fechaCreacion', new Date(this.createJuegoData.fechaCreacion).getTime().toString());
         formData.append('sinopsis', this.createJuegoData.sinopsis);
 
         for (let index = 0; index < this.createJuegoData.tags.length; index++) {
@@ -68,8 +68,8 @@ export class CreateJuegoComponent {
         //Esperamos a que se guarde
         await firstValueFrom(this.http.post(url, formData, {headers: headers}));
 
-        //Nos vamos al listado
-        this.router.navigate(['/']);
+        //Nos vamos al detalle del videojuego
+        this.router.navigate([`/videojuego/${this.createJuegoData.nombre}`]);
       }
 
     }finally{
