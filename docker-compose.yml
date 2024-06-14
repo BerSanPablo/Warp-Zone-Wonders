@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  sql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wzw
+    networks:
+      - local-network
+
+  api:
+    build: src-api
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://sql:3306/wzw
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      ADMIN_NICK: admin
+      ADMIN_EMAIL: admin@admin.com
+      ADMIN_PASSWORD: passwordadmin
+    depends_on:
+      - sql
+    networks:
+      - local-network
+
+networks:
+  local-network:
+    driver: bridge

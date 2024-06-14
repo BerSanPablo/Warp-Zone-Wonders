@@ -5,6 +5,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,6 +32,14 @@ public class DatosIniciales implements CommandLineRunner {
 	@Autowired
 	private TagRepository tagRepo;
 	
+	@Value("${admin.nick}")
+    private String adminNick;
+	
+	@Value("${admin.email}")
+    private String adminEmail;
+	
+	@Value("${admin.password}")
+    private String adminPassword;
 
 	private static final Logger logger = LoggerFactory.getLogger(DatosIniciales.class);
 
@@ -43,9 +52,9 @@ public class DatosIniciales implements CommandLineRunner {
 		if(userRepo.findByNick("admin") == null) {
 			logger.info("## Creando admin ##");
 			Usuario admin = new Usuario();
-			admin.setNick("admin");
-			admin.setEmail("admin@admin.com");
-			admin.setPassword(new BCryptPasswordEncoder(10).encode("passwordadmin"));
+			admin.setNick(adminNick);
+			admin.setEmail(adminEmail);
+			admin.setPassword(new BCryptPasswordEncoder(10).encode(adminPassword));
 			admin.getRoles().add(Role.ROLE_USER);
 			admin.getRoles().add(Role.ROLE_ADMIN);
 			userRepo.save(admin);
