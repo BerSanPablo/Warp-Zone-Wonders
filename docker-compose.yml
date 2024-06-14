@@ -26,6 +26,15 @@ services:
       - sql
     networks:
       - local-network
+  
+  frontend:
+    build: src-web
+    ports:
+      - "4201:4200"
+    volumes:
+      - ./:/angular-app
+    networks:
+      - local-network
 
 networks:
   local-network:
