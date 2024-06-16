@@ -46,6 +46,7 @@ public class SecurityConfig {
 
                 .requestMatchers("/api/v1/user/roles").authenticated()
                 .requestMatchers("/api/v1/user/datosUsuario").authenticated()
+                .requestMatchers("/api/v1/user/update").authenticated()
                 .requestMatchers("/api/v1/user/**").hasAuthority(Role.ROLE_ADMIN.toString())
 
                 .requestMatchers(HttpMethod.GET, "/api/v1/videojuego/**").permitAll()

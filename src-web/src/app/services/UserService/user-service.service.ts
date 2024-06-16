@@ -116,6 +116,44 @@ export class UserService {
     return true
   }
 
+  async updateUser(comunidad: string, imagenPerfil: File | null) {
+    //Datos para la conexion
+    const url = "http://localhost:8080/api/v1/user/update"
+
+    //Recogemos los datos de forma asíncrona
+    let datosUsuarioResponse: any
+    try{
+
+      //Con el token hacemos una petición para recoger los datos del usuario
+      const headersData = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userData!.token
+      });
+
+      const formData = new FormData();
+      formData.append('comunidad', comunidad);
+      if(imagenPerfil){
+        formData.append('imagenPerfil', imagenPerfil);
+      }
+      datosUsuarioResponse = await firstValueFrom(this.http.post<any>(url, formData, { headers: headersData }));
+
+    }catch(err){
+      return false
+    }
+
+    //Actualizamos los datos del usuario
+    const user = this.userData!
+    user.comunidad = datosUsuarioResponse.comunidad
+    user.imagenPerfil = datosUsuarioResponse.imagenPerfil
+
+    //Guardamos el usuario en el servicio
+    this.setUser(user)
+
+    //Guardamos el usuario en sesion
+    sessionStorage.setItem('U2FsdGVkX19esp5By6OH6I4AU3+FG/iAEZF3XgqUZjs=', JSON.stringify(user))
+
+    return true
+  }
+
   setUser(data: UserData): void {
     this.userData = data;
   }

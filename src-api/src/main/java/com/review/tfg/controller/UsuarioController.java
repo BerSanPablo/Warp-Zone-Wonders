@@ -11,9 +11,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.review.tfg.dto.auth.request.SignUpRequest;
 import com.review.tfg.dto.auth.response.LoginDataResponse;
 import com.review.tfg.dto.usuario.response.UsuarioSimplificadoResponse;
 import com.review.tfg.service.UsuarioService;
@@ -39,6 +43,21 @@ public class UsuarioController {
 	@GetMapping("/roles")
     public ResponseEntity<?> getRoles(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(userDetails.getAuthorities());
+    }
+
+	@PostMapping("/update")
+    public ResponseEntity<LoginDataResponse> updateUser(@AuthenticationPrincipal UserDetails userDetails,
+							            @RequestParam("comunidad") String comunidad,
+							            @RequestParam(required = false, name= "imagenPerfil") MultipartFile imagenPerfil
+							            ) {
+		
+		//Obtenemos los roles
+		Set<Role> roles = new HashSet<Role>();
+		userDetails.getAuthorities().forEach(p -> {
+			roles.add(Role.valueOf(p.getAuthority()));
+		});
+		
+		return ResponseEntity.ok(new LoginDataResponse(usuarioService.updateUser(userDetails.getUsername(), comunidad, imagenPerfil), roles));
     }
 
 	@GetMapping("/datosUsuario")
